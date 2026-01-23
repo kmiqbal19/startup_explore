@@ -107,16 +107,19 @@ EventSchema.index({ slug: 1 });
 
 // Pre-save hook for slug generation, date normalization, and validation
 EventSchema.pre('save', function () {
-  // Generate slug from title if title has changed or document is new
-  if (this.isModified('title')) {
-    this.slug = this.title
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, '') // Remove special characters
-      .replace(/\s+/g, '-') // Replace spaces with hyphens
-      .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
-      .trim();
-  }
-
+// Generate slug from title if title has changed or document is new
+if (this.isModified('title')) {
+  const baseSlug = this.title
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '') // Remove special characters
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+    .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+  
+  // Append short unique suffix to prevent collisions
+  const suffix = this._id?.toString().slice(-6) || Date.now().toString(36);
+  this.slug = `${baseSlug}-${suffix}`;
+}
   // Validate and normalize date to ISO format
   if (this.isModified('date')) {
     const parsedDate = new Date(this.date);
