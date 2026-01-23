@@ -107,26 +107,24 @@ EventSchema.index({ slug: 1 });
 
 // Pre-save hook for slug generation, date normalization, and validation
 EventSchema.pre('save', function () {
-// Generate slug from title if title has changed or document is new
-if (this.isModified('title')) {
-  const baseSlug = this.title
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '') // Remove special characters
-    .replace(/\s+/g, '-') // Replace spaces with hyphens
-    .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
-    .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
-  
-  // Append short unique suffix to prevent collisions
-  const suffix = this._id?.toString().slice(-6) || Date.now().toString(36);
-  this.slug = `${baseSlug}-${suffix}`;
-}
+  // Generate slug from title if title has changed or document is new
+  if (this.isModified('title')) {
+    const baseSlug = this.title
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '') // Remove special characters
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+      .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+
+    // Append short unique suffix to prevent collisions
+    const suffix = this._id?.toString().slice(-6) || Date.now().toString(36);
+    this.slug = `${baseSlug}-${suffix}`;
+  }
   // Validate and normalize date to ISO format
   if (this.isModified('date')) {
     const parsedDate = new Date(this.date);
     if (isNaN(parsedDate.getTime())) {
-      
-       throw new Error('Invalid date format. Please provide a valid date.')
-      
+      throw new Error('Invalid date format. Please provide a valid date.');
     }
     // Store as ISO string for consistency
     this.date = parsedDate.toISOString().split('T')[0];
@@ -136,10 +134,11 @@ if (this.isModified('title')) {
   if (this.isModified('time')) {
     const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
     if (!timeRegex.test(this.time)) {
-      throw new Error('Invalid time format. Please use HH:MM format (e.g., 14:30).')
+      throw new Error(
+        'Invalid time format. Please use HH:MM format (e.g., 14:30).'
+      );
     }
   }
-
 });
 
 const Event = models.Event || model<IEvent>('Event', EventSchema);
