@@ -1,6 +1,7 @@
 import EventCard from '@/components/EventCard';
 import ExploreBtn from '@/components/ExploreBtn';
 import { IEvent } from '@/database';
+
 export default async function Home() {
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
   const events: IEvent[] = await fetch(`${BASE_URL}/api/events`, {

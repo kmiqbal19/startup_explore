@@ -33,7 +33,6 @@ const EventCard = ({
   EventDTO,
   'title' | 'image' | 'slug' | 'location' | 'date' | 'time'
 >) => {
-
   return (
     <Link href={`/events/${slug}`} id="event-card">
       <Image

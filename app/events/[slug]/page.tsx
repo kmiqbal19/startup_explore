@@ -1,6 +1,7 @@
 import BookEvent from '@/components/BookEvent';
 import EventCard, { EventDTO } from '@/components/EventCard';
 import getSimilarEventsBySlug from '@/lib/actions/event.actions';
+import { cacheLife } from 'next/cache';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
@@ -69,7 +70,7 @@ const EventDetailsPage = async ({
     tags,
   } = event;
   const bookings = 10;
-  const similarEvents = await getSimilarEventsBySlug(slug);  
+  const similarEvents = await getSimilarEventsBySlug(slug);
   return (
     <section id="event">
       <div className="header">
@@ -139,18 +140,27 @@ const EventDetailsPage = async ({
                 Be the first to book your spot for this event.
               </p>
             )}
-            <BookEvent />
+            <BookEvent eventId={event._id} slug={event.slug} />
           </div>
         </aside>
       </div>
       <div className="flex w-full flex-col gap-4 pt-20">
         <h2>Similar Events</h2>
         <div className="events">
-            {similarEvents.length > 0 && (
-              similarEvents.map((simEvent: EventDTO, idx: number) => {
-                return <EventCard key={idx} title={simEvent.title} image={simEvent.image} slug={simEvent.slug} location={simEvent.location} date={simEvent.date} time={simEvent.time} />;
-              }))
-              }
+          {similarEvents.length > 0 &&
+            similarEvents.map((simEvent: EventDTO, idx: number) => {
+              return (
+                <EventCard
+                  key={idx}
+                  title={simEvent.title}
+                  image={simEvent.image}
+                  slug={simEvent.slug}
+                  location={simEvent.location}
+                  date={simEvent.date}
+                  time={simEvent.time}
+                />
+              );
+            })}
         </div>
       </div>
     </section>
