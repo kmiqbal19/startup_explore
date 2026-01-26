@@ -9,7 +9,7 @@ const ExploreBtn = () => {
       onClick={() => console.log('CLICKED')}
     >
       <a href="#events">
-        Explore Events
+        Get Involved
         <Image
           src="/icons/arrow-down.svg"
           alt="down arrow"

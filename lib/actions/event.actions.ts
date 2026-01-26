@@ -19,3 +19,14 @@ const getSimilarEventsBySlug = async (slug: string) => {
 };
 
 export default getSimilarEventsBySlug;
+
+export const getAllEvents = async () => {
+  try {
+    await connectDB();
+    const events = await Event.find({}).lean();
+    return events;
+  }catch (error ){
+    console.error('Error fetching all events:', error);
+    return [];
+  }
+}
