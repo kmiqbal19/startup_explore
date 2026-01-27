@@ -1,11 +1,11 @@
 import BookEvent from '@/components/BookEvent';
 import EventCard, { EventDTO } from '@/components/EventCard';
 import getSimilarEventsBySlug from '@/lib/actions/event.actions';
-import { cacheLife } from 'next/cache';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
 const EventDetailItem = ({
   iconSrc,
   altText,
@@ -71,6 +71,7 @@ const EventDetailsPage = async ({
   } = event;
   const bookings = 10;
   const similarEvents = await getSimilarEventsBySlug(slug);
+  console.log('Similar Events:', similarEvents);
   return (
     <section id="event" className='z-1'>
       <div className="header">

@@ -37,7 +37,7 @@ const [isSuccess, setIsSuccess] = useState(false);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-5">
+    <div className="min-h-screen flex items-center justify-center px-5 z-1">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-md bg-transparent rounded-xl border border-border p-6 shadow-sm flex flex-col gap-5"
