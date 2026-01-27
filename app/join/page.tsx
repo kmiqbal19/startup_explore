@@ -7,6 +7,9 @@ const JoinPage = () => {
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 const [isSuccess, setIsSuccess] = useState(false);
+const baseUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  'http://localhost:3000';
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -14,7 +17,7 @@ const [isSuccess, setIsSuccess] = useState(false);
     setIsSuccess(false);
 
     try {
-      const res = await fetch(`/api/contact`, {
+      const res = await fetch(`${baseUrl}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

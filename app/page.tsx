@@ -3,11 +3,15 @@ import ExploreBtn from '@/components/ExploreBtn';
 import { IEvent } from '@/database';
 
 export default async function Home() {
-  const events: IEvent[] = await fetch(`/api/events`, {
-    cache: 'no-store',
-  })
-    .then((res) => res.json())
-    .then((data) => data.events);
+ const baseUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  'http://localhost:3000';
+
+const events: IEvent[] = await fetch(`${baseUrl}/api/events`, {
+  cache: 'no-store',
+})
+  .then(res => res.json())
+  .then(data => data.events);
   return (
     <section>
       <h1 className="text-center">

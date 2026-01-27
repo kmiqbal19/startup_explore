@@ -48,7 +48,10 @@ const EventDetailsPage = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
-  const response = await fetch(`/api/events/${slug}`, {
+  const baseUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  'http://localhost:3000';
+  const response = await fetch(`${baseUrl}/api/events/${slug}`, {
 cache: 'no-store',
   });
   const { event } = await response.json();
