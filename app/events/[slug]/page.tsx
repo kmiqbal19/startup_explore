@@ -3,8 +3,8 @@ import EventCard, { EventDTO } from '@/components/EventCard';
 import getSimilarEventsBySlug from '@/lib/actions/event.actions';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const VERCEL_URL = 'https://meet-here-lime.vercel.app/';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || VERCEL_URL;
 
 const EventDetailItem = ({
   iconSrc,

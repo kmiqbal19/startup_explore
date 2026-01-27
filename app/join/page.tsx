@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const VERCEL_URL = 'https://meet-here-lime.vercel.app/';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || VERCEL_URL;
 const JoinPage = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');

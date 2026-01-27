@@ -1,9 +1,9 @@
 import EventCard from '@/components/EventCard';
 import ExploreBtn from '@/components/ExploreBtn';
 import { IEvent } from '@/database';
-
+const VERCEL_URL = 'https://meet-here-lime.vercel.app/';
 export default async function Home() {
-  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || VERCEL_URL;
   const events: IEvent[] = await fetch(`${BASE_URL}/api/events`, {
     next: {
       revalidate: 60,
