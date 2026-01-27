@@ -4,6 +4,7 @@ import './globals.css';
 import LiquidEther from '@/components/LiquidEther';
 import Navbar from '@/components/Navbar';
 import { PostHogProvider } from './providers';
+import Particles from '@/components/Particles';
 
 const schibstedGrotesk = Schibsted_Grotesk({
   variable: '--font-schibsted-grotesk',
@@ -33,7 +34,7 @@ export default function RootLayout({
         <PostHogProvider>
           <Navbar />
 
-          <div className="absolute inset-0 top-0 z-[-1] min-h-screen">
+          {/* <div className="absolute inset-0 top-0 z-[-1] min-h-screen">
             <LiquidEther
               colors={['#5227FF', '#FF9FFC', '#B19EEF']}
               mouseForce={20}
@@ -51,8 +52,20 @@ export default function RootLayout({
               autoResumeDelay={3000}
               autoRampDuration={0.6}
             />
-          </div>
-
+          </div> */}
+<div style={{ width: '100%', height: '1000px', position: 'absolute', zIndex: 0 }}>
+  <Particles
+    particleColors={["#ff0080"]}
+    particleCount={200}
+    particleSpread={10}
+    speed={0.1}
+    particleBaseSize={100}
+    moveParticlesOnHover
+    alphaParticles={false}
+    disableRotation={false}
+    pixelRatio={1}
+/>
+</div>
           <main>{children}</main>
         </PostHogProvider>
       </body>

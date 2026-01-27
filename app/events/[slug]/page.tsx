@@ -72,7 +72,7 @@ const EventDetailsPage = async ({
   const bookings = 10;
   const similarEvents = await getSimilarEventsBySlug(slug);
   return (
-    <section id="event">
+    <section id="event" className='z-1'>
       <div className="header">
         <h1>Event Description</h1>
         <p className="mt-2">{description}</p>
