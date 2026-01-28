@@ -13,6 +13,11 @@ pnpm dev
 # or
 bun dev
 ```
+### DOCKER 
+
+```
+docker run -p 3000:3000 --env-file .env.local meethere
+```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

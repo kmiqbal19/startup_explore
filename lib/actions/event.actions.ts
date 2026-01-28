@@ -35,6 +35,8 @@ export const getAllEvents = async () => {
   try {
     await connectDB();
     const events = await Event.find({}).lean();
+    console.log('All events fetched:', events);
+    console.log(process.env.MONGODB_URI);
     return events;
   } catch (error) {
     console.error('Error fetching all events:', error);
